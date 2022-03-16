@@ -1,41 +1,85 @@
 var menuLinks = [
-    {text: 'about', href: '/about'},
-    {text: 'catalog', href: '/catalog'},
-    {text: 'orders', href: '/orders'},
-    {text: 'account', href: '/account'},
-  ];
+  { text: "about", href: "/about" },
+  {
+    text: "catalog",
+    href: "#",
+    subLinks: [
+      { text: "all", href: "/catalog/all" },
+      { text: "top selling", href: "/catalog/top" },
+      { text: "search", href: "/catalog/search" },
+    ],
+  },
+  {
+    text: "orders",
+    href: "#",
+    subLinks: [
+      { text: "new", href: "/orders/new" },
+      { text: "pending", href: "/orders/pending" },
+      { text: "history", href: "/orders/history" },
+    ],
+  },
+  {
+    text: "account",
+    href: "#",
+    subLinks: [
+      { text: "profile", href: "/account/profile" },
+      { text: "sign out", href: "/account/signout" },
+    ],
+  },
+]
 
 let mainEl = document.querySelector('main')
 
-backgroundColor: 'mainEl(--main-bg)'
+let mainBg = 'var(--main-bg)'
 
-mainEl.textContent = '<h1>SEI Rocks!</h1>'
+mainEl.style.backgroundColor = mainBg
+
+mainEl.innerHTML = '<h1>SEI Rocks!</h1>'
 
 mainEl.classList.add('flex-ctr')
 
-console.log(mainEl)
-
 let topMenuEl = document.getElementById('top-menu')
 
-topMenuEl.style.height = 100
+topMenuEl.style.height = '100%'
 
-backgroundColor: 'topMenuEl(--top-menu-bg)'
+let topMenuBg = 'var(--top-menu-bg)'
+
+topMenuEl.style.backgroundColor = topMenuBg
 
 topMenuEl.classList.add('flex-around')
 
-// Task 3.1
-// Iterate over the entire menuLinksarray and for each "link" object:
+for(let link of menuLinks){
+    let a = document.createElement('a')
+    a.setAttribute('href', link.href)
+    a.innerText = `${link.text}`
 
-// Create an <a>element.
+    topMenuEl.append(a)
+}
+//part 2
+let subMainEl = document.getElementById('sub-menu')
 
-// On the new element, add an hrefattribute with its value set to the hrefproperty of the "link" object.
+subMainEl.style.height = '100%'
 
-// Set the new element's content to the value of the textproperty of the "link" object.
+let subMenuBg = 'var(--sub-menu-bg)'
 
-// Append the new element to the topMenuElelement.
+subMainEl.style.backgroundColor = subMenuBg
+console.log('hello')
+subMainEl.classList.add('flex-around')
 
+subMainEl.style.position = 'absolute'
 
-// for(let link of menuLinks){
-//     document.createElement('a')
-//     link.setAttribute('href', '/about')
-// }
+subMainEl.style.top = '0'
+
+let topMenuLinks = document.querySelectorAll('a')
+
+let showingSubMenu = false
+
+topMenuEl.addEventListener('click', function (event) {
+  event.preventDefault()
+  event.stopPropagation()
+  if(event.target.tagName !== 'A' ) {
+    return}
+  console.log(event.target.textContent)
+  
+})
+
